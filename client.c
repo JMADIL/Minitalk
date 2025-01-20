@@ -9,6 +9,7 @@
 /*   Updated: 2025/01/19 21:15:49 by ajamoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <Minitalk.h>
 
 int	check_pid(char *str)
 {
@@ -45,11 +46,11 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac == 3)
 	{
-		if (check_pid(argv[1]))
+		if (check_pid(av[1]))
 		{
 			while (av[2][i] != '\0')
 			{
-				send_bits(argv[1], av[2][i]);
+				send_bits(av[1], av[2][i]);
 				i++;
 			}
 			ft_putchar('\n');
