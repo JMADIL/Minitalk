@@ -6,22 +6,20 @@
 /*   By: ajamoun <ajamoun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:17:11 by ajamoun           #+#    #+#             */
-/*   Updated: 2025/01/19 21:17:12 by ajamoun          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:06:25 by ajamoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef MINITALK
-#define MINITALK
 
-#include <signal.h>
-#include <unistd.h>
+#ifndef MINITALK_H
+# define MINITALK_H
 
-#ifndef SIGUSR1
-# define SIGUSR1 10
-#endif
+# include <signal.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#ifndef SIGUSR2
-# define SIGUSR2 12
-#endif
-
+int		ft_atoi(const char *str);
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
+void	ft_putnbr(int n);
 
 #endif

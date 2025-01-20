@@ -6,19 +6,7 @@
 /*   By: ajamoun <ajamoun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:15:43 by ajamoun           #+#    #+#             */
-/*   Updated: 2025/01/19 21:15:44 by ajamoun          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minitalk_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yabenman <yabenman@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 06:16:45 by yabenman          #+#    #+#             */
-/*   Updated: 2024/12/19 18:54:20 by yabenman         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:48:34 by ajamoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,66 +14,63 @@
 
 int	ft_atoi(const char *str)
 {
-	int	result;
-	int	sign;
-	int	i;
+	int		i;
+	int		s;
+	long	rs;
 
 	i = 0;
-	result = 0;
-	sign = 1;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+	s = 1;
+	rs = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			sign *= -1;
+			s *= -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = result * 10 + str[i] - '0';
+		rs = rs * 10 + (str[i] - 48);
 		i++;
 	}
-	return (result * sign);
+	return (rs * s);
 }
-
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
-
-void	ft_putnbr(int n)
-{
-	long	x;
-
-	x = n;
-	if (x < 0)
-	{
-		x = -x;
-		write(1, "-", 1);
-	}
-	if (x <= 9)
-	{
-		x = x + 48;
-		write(1, &x, 1);
-	}
-	else
-	{
-		ft_putnbr(x / 10);
-		ft_putnbr(x % 10);
-	}
-}
-
 void	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return ;
 	while (str[i])
 	{
 		ft_putchar(str[i]);
 		i++;
+	}
+}
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+	{
+		ft_putstr("-2147483648");
+		return ;
+	}
+	else if (n < 0)
+	{
+		ft_putchar('-');
+		n = -n;
+		ft_putnbr(n);
+	}
+	else if (n >= 0 && n <= 9)
+	{
+		ft_putchar(n + 48);
+	}
+	else
+	{
+		ft_putnbr(n / 10);
+		ft_putchar((n % 10) + 48);
 	}
 }
