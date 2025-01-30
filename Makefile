@@ -5,6 +5,8 @@ C_SRC = client.c minitalk_utils.c
 S_OBJ = $(S_SRC:.c=.o)
 C_OBJ = $(C_SRC:.c=.o)
 
+CFLAGS = -Wall -Wextra -Werror
+
 all: server client
 
 server: $(S_OBJ)
@@ -20,3 +22,5 @@ fclean: clean
 	rm -rf $(SERVER_NAME) $(CLIENT_NAME)
 
 re: fclean all
+
+.PHONY: clean

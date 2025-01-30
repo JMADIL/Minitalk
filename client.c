@@ -6,24 +6,12 @@
 /*   By: ajamoun <ajamoun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 20:17:46 by ajamoun           #+#    #+#             */
-/*   Updated: 2025/01/20 19:26:05 by ajamoun          ###   ########.fr       */
+/*   Updated: 2025/01/26 15:24:15 by ajamoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void    print_success()
-{
-    ft_putstr("\033[1;32m");
-    
-    ft_putstr(" ███████ ██    ██  ██████  ██████ ███████ ███████ ███████\n");
-    ft_putstr(" ██      ██    ██ ██      ██      ██      ██      ██     \n");
-    ft_putstr(" ███████ ██    ██ ██      ██      █████   ███████ ███████\n");
-    ft_putstr("      ██ ██    ██ ██      ██      ██           ██      ██\n");
-    ft_putstr(" ███████  ██████   ██████  ██████ ███████ ███████ ███████\n");
-    
-    ft_putstr("\033[0m");
-}
 int	check_pid(char *str)
 {
 	int	pid;
@@ -35,8 +23,9 @@ int	check_pid(char *str)
 	i = kill(pid, 0);
 	if (i == -1)
 		return (0);
-	return (pid);
+	return (1);
 }
+
 void	send_bits(int pid, char c)
 {
 	int	i;
@@ -49,13 +38,14 @@ void	send_bits(int pid, char c)
 		else
 			kill(pid, SIGUSR1);
 		i--;
-		usleep(500);
+		usleep(100);
 	}
 }
+
 int	main(int ac, char **av)
 {
-	int i;
-	int pid;
+	int	i;
+	int	pid;
 
 	i = 0;
 	if (ac == 3)
@@ -69,10 +59,9 @@ int	main(int ac, char **av)
 				i++;
 			}
 			ft_putchar('\n');
-			print_success();
 		}
 		else
-			ft_putstr("The provided PID is invalid. Please check and try again!\n");
+			ft_putstr("The provided PID is invalid. try again!\n");
 	}
 	else
 		ft_putstr("Syntax error! \n");

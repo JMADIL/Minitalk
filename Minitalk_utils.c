@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Minitalk_utils.c                                   :+:      :+:    :+:   */
+/*   minitalk_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajamoun <ajamoun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:15:43 by ajamoun           #+#    #+#             */
-/*   Updated: 2025/01/20 17:48:34 by ajamoun          ###   ########.fr       */
+/*   Updated: 2025/01/24 23:23:13 by ajamoun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ int	ft_atoi(const char *str)
 	}
 	return (rs * s);
 }
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
+
 void	ft_putstr(char *str)
 {
 	int	i;
@@ -51,6 +53,7 @@ void	ft_putstr(char *str)
 		i++;
 	}
 }
+
 void	ft_putnbr(int n)
 {
 	if (n == -2147483648)
