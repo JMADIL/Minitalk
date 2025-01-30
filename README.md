@@ -61,8 +61,10 @@ getpid();
 	- Prototype : pid_t getpid(void);
 
 pause();
+
 	-This function causes the calling process to sleep until a signal is received. The process remains blocked 	until a signal handler is executed or the signal is ignored
 	- Prototype : int pause(void);
+ 
 sleep();
 
 	-This function causes the process to sleep for a specified number of seconds.
