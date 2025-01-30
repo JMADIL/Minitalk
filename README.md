@@ -1,11 +1,11 @@
 Minitalk :
 
-New function that we will use in this project is :
+The new functions that we will use in this project are:
 
 signal();
 
-	-When we recieve a signal this function called a signal handler for this signal
-	(signal is a message from the operating system to a program indicating that some event has occured)
+	-When we receive a signal this function called a signal handler for this signal
+	(signal is a message from the operating system to a program indicating that some event has occurred)
 
 	- Prototype : sighandler_t signal(int signum, sighandler_t handler);
 
@@ -18,7 +18,7 @@ sigemptyset();
 
 sigaddset();
 	
-	-This function allows you to add a signal to signal set (takes two arguments: a pointer to a set of 	signals and the number of the signal to add to the set)
+	-This function allows you to add a signal to a signal set (takes two arguments: a pointer to a set of 	signals and the number of the signal to add to the set)
 	
 	- Prototype : int sigaddset(sigset_t *set, int signum);
 
@@ -39,7 +39,7 @@ sigaddset();
 
 sigaction();
 	
-	-This function used to specify the action to be taken when a specific signal is received by a process.
+	-This function is used to specify the action to be taken when a process receives a specific signal.
 	
 	- Prototype : int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 	
@@ -47,17 +47,17 @@ sigaction();
 	
 	-(The "*act" argument is a pointer to a struct sigaction that specifies the action to be taken when the 	signal is received)
 	
-	-(The oldact argument is a pointer to a struct sigaction that is used to retrieve the previous action 	for 	the specified signal)
+	-(The oldest argument is a pointer to a struct sigaction that is used to retrieve the previous action 	for 	the specified signal)
 
 kill();
 
 	- This function is a system call that sends a signal to a process.
 	-Prototype : int kill(pid_t pid, int sig);
-	(the pid argument is to select which process youre sending to the signal, and the sig is the type of the 	signal)
+	(the pid argument is to select which process you are sending to the signal, and the sig is the type of the 	signal)
 
 getpid();
 
-	-This function return the id of the process.
+	-This function returns the process ID.
 	- Prototype : pid_t getpid(void);
 
 pause();
@@ -65,18 +65,18 @@ pause();
 	- Prototype : int pause(void);
 sleep();
 
-	-This function causes the process to sleep for a specified num of seconds.
+	-This function causes the process to sleep for a specified number of seconds.
 	- Prototype : unsigned int sleep(unsigned int seconds);
 	
 usleep();
 	
-	-This function is like sleep() but the diff is usleep() causes the process to sleep specified num of 	microseconds.
+	-This function is like sleep() but the diff that usleep() causes the process to sleep a specified number of microseconds.
 	- Prototype : int usleep(useconds_t usec);
 exit();
 
-	- This function in the C standard library that terminates the calling process immediately.
+	- This function in the C standard library terminates the calling process immediately.
 	- Prototype : void exit(int status);
 
-	(status : A value of 0 indicates successful termination, while non-zero values indicate an error)
+	(Status: A value of 0 indicates successful termination, while non-zero values indicate an error)
 
 Understand each one of them then start coding.
