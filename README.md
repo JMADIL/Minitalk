@@ -1,4 +1,4 @@
-Minitalk :
+```Minitalk :
 
 The new functions that we will use in this project are:
 
