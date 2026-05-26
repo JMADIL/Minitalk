@@ -1,84 +1,107 @@
-```Minitalk :
+# 📡 Minitalk
 
-The new functions that we will use in this project are:
+> A small data exchange program using UNIX signals — 42 Network project
 
-signal();
+[![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)](https://42.fr)
+[![Language](https://img.shields.io/badge/Language-C-blue?style=for-the-badge&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-	-When we receive a signal this function called a signal handler for this signal
-	(signal is a message from the operating system to a program indicating that some event has occurred)
+---
 
-	- Prototype : sighandler_t signal(int signum, sighandler_t handler);
+## 📖 About
 
-sigemptyset();
+**Minitalk** is a 42 school project that implements a client-server communication system using **UNIX signals** (`SIGUSR1` and `SIGUSR2`). The client sends a string message to the server one bit at a time, and the server reconstructs and displays the original message.
 
-	-This function is used to empty a signal set "takes a pointer to a set of signals as an argument and 	empties this set by adding no signal to it"
-	(Signal set is a tool that helps you manage how a process interacts with signals)
+This project introduces the fundamentals of **inter-process communication (IPC)** and **bitwise operations** in C.
 
-	- Prototype : int sigemptyset(sigset_t *set);
+## 🏗️ How It Works
 
-sigaddset();
-	
-	-This function allows you to add a signal to a signal set (takes two arguments: a pointer to a set of 	signals and the number of the signal to add to the set)
-	
-	- Prototype : int sigaddset(sigset_t *set, int signum);
+```
+┌──────────┐     SIGUSR1 / SIGUSR2      ┌──────────┐
+│  CLIENT  │ ─────────────────────────►  │  SERVER  │
+│          │    (sends bits one by one)  │          │
+│  PID: ?  │                             │  PID: X  │
+│  Input:  │     Bit 0 → SIGUSR1        │  Output: │
+│ "Hello"  │     Bit 1 → SIGUSR2        │ "Hello"  │
+└──────────┘                             └──────────┘
+```
 
-	EXAMPLE : (sigemptyset & sigaddset)
+1. The **server** starts and prints its **PID** (Process ID)
+2. The **client** takes the server PID and the message as arguments
+3. Each character is converted to its **binary representation** (8 bits)
+4. For each bit, the client sends:
+   - `SIGUSR1` → bit is `0`
+   - `SIGUSR2` → bit is `1`
+5. The server reconstructs each character bit by bit and prints it
 
-	#include <signal.h>
+## 🚀 Getting Started
 
-	int main(void)
-	{
-    		sigset_t signal_set;
+### Prerequisites
 
-    		// Initialize an empty signal set
-    		sigemptyset(&signal_set);
+- GCC compiler
+- Make
+- A UNIX-based OS (Linux / macOS)
 
-    		// Add SIGINT to the signal set
-    		sigaddset(&signal_set, SIGINT);
-	}
+### Build
 
-sigaction();
-	
-	-This function is used to specify the action to be taken when a process receives a specific signal.
-	
-	- Prototype : int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
-	
-	-(The "signum" specifies the signal for which the action is being specified)
-	
-	-(The "*act" argument is a pointer to a struct sigaction that specifies the action to be taken when the 	signal is received)
-	
-	-(The oldest argument is a pointer to a struct sigaction that is used to retrieve the previous action 	for 	the specified signal)
+```bash
+git clone https://github.com/JMADIL/MINITALK.git
+cd MINITALK
+make
+```
 
-kill();
+This will compile two binaries: `server` and `client`.
 
-	- This function is a system call that sends a signal to a process.
-	-Prototype : int kill(pid_t pid, int sig);
-	(the pid argument is to select which process you are sending to the signal, and the sig is the type of the 	signal)
+### Usage
 
-getpid();
+**1. Start the server:**
 
-	-This function returns the process ID.
-	- Prototype : pid_t getpid(void);
+```bash
+./server
+```
 
-pause();
+The server will display its PID:
 
-	-This function causes the calling process to sleep until a signal is received. The process remains blocked 	until a signal handler is executed or the signal is ignored
-	- Prototype : int pause(void);
- 
-sleep();
+```
+Server PID: 12345
+```
 
-	-This function causes the process to sleep for a specified number of seconds.
-	- Prototype : unsigned int sleep(unsigned int seconds);
-	
-usleep();
-	
-	-This function is like sleep() but the diff that usleep() causes the process to sleep a specified number of microseconds.
-	- Prototype : int usleep(useconds_t usec);
-exit();
+**2. Send a message from the client:**
 
-	- This function in the C standard library terminates the calling process immediately.
-	- Prototype : void exit(int status);
+```bash
+./client <server_pid> "Hello, World!"
+```
 
-	(Status: A value of 0 indicates successful termination, while non-zero values indicate an error)
+The server will display the received message.
 
-Understand each one of them then start coding.
+## 📂 Project Structure
+
+```
+MINITALK/
+├── Makefile            # Build system
+├── Minitalk.h          # Header file with prototypes & includes
+├── Minitalk_utils.c    # Utility functions (ft_atoi, ft_strlen, etc.)
+├── client.c            # Client: encodes and sends message via signals
+├── server.c            # Server: receives signals and decodes message
+└── README.md           # This file
+```
+
+## 🔑 Key Concepts Learned
+
+| Concept | Description |
+|---------|-------------|
+| **UNIX Signals** | Using `SIGUSR1` and `SIGUSR2` for inter-process communication |
+| **Bitwise Operations** | Encoding/decoding characters bit by bit |
+| **Signal Handlers** | Catching and processing signals with `sigaction()` |
+| **Process Management** | Working with PIDs, `getpid()`, and `kill()` |
+| **Signal Sets** | Managing signals with `sigemptyset()` and `sigaddset()` |
+
+## 🔧 Allowed Functions
+
+`write` · `ft_printf` · `signal` · `sigemptyset` · `sigaddset` · `sigaction` · `kill` · `getpid` · `malloc` · `free` · `pause` · `sleep` · `usleep` · `exit`
+
+## 👤 Author
+
+**Adil Jamoun** — [@JMADIL](https://github.com/JMADIL)
+
+> 🏫 1337 Coding School (42 Network) — Morocco
